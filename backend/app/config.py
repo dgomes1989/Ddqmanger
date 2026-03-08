@@ -2,12 +2,18 @@ from pydantic_settings import BaseSettings
 
 
 class Settings(BaseSettings):
-    database_url: str = "postgresql+asyncpg://ddqmanager:ddqmanager@localhost:5432/ddqmanager"
-    s3_endpoint_url: str = "http://localhost:9000"
-    s3_access_key: str = "minioadmin"
-    s3_secret_key: str = "minioadmin"
-    s3_bucket_name: str = "ddq-documents"
+    # Supabase (get these from your Supabase project Settings → API)
+    supabase_url: str = ""
+    supabase_key: str = ""  # Use the "service_role" key (not anon)
+    supabase_storage_bucket: str = "ddq-documents"
+
+    # Database (get from Supabase Settings → Database → Connection string)
+    database_url: str = ""
+
+    # Claude API
     anthropic_api_key: str = ""
+
+    # CORS
     cors_origins: list[str] = ["http://localhost:3000"]
 
     model_config = {"env_file": ".env"}
